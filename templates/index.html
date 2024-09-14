@@ -124,18 +124,20 @@
   </header>
   <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="p-4 bg-gray-50">
+      <div class="p-4">
         <h2 class="text-lg font-semibold mb-4">Images with details</h2>
             <div class="grid grid-cols-8 gap-4">
                 {% for r in resources %}
-                <div class="bg-white p-2 rounded-lg shadow-md">
+                <div class="p-2 rounded-lg hover:shadow-md">
                   {% if r.type == 'dir' %}
                     <img src="{% static 'folder_img.png' %}" alt="Folder" class="rounded-md w-full">
-                  {% elif r.type == 'docs' %}
-                    <img src="{% static 's/document-icon.jpg' %}" alt="Document" class="rounded-md w-full">
+                  {% elif r.type == 'file' and r.media_type != 'video' and r.media_type != 'image' %}
+                    <img src="/static/{{ r.file_extension }}.png" alt="Document" class="rounded-md w-full">
+                  {% else %}
+                    <img src="{{ r.preview_url }}" alt="{{ r.name }}" class="rounded-md w-full">
                   {% endif %}
-                <img src="{{ r.preview_url }}" alt="{{ r.name }}" class="rounded-md w-full">
-                  <div class="mt-2 text-sm text-gray-600">{{ r.name }}</div>
+
+                  <div class="mt-2 text-sm text-gray-600 truncate">{{ r.name }}</div>
                   <div class="text-xs text-gray-500">{{ r.size }}</div>
                 </div>
                 {% endfor %}
