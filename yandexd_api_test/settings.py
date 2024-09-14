@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+
 import environ
+import os
 
 env = environ.Env()
 environ.Env.read_env()
@@ -41,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # core apps
+    'drive'
 ]
 
 MIDDLEWARE = [
@@ -77,6 +82,9 @@ WSGI_APPLICATION = 'yandexd_api_test.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+]
 
 DATABASES = {
     'default': {
